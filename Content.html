@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Линия — спокойный журнал о внимании, людях и идеях.">
+	<title>Линия — журнал для вдумчивого чтения</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #1f2726;
+			--muted: #68716e;
+			--paper: #f5f2ea;
+			--surface: #fbfaf6;
+			--line: #dddcd3;
+			--accent: #c95036;
+			--accent-soft: #e8b19a;
+			--sage: #c8d2c1;
+			--serif: "Playfair Display", Georgia, serif;
+			--sans: "DM Sans", Arial, sans-serif;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: var(--sans);
+			line-height: 1.6;
+		}
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			opacity: .22;
+			background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.11'/%3E%3C/svg%3E");
+			mix-blend-mode: multiply;
+		}
+		a { color: inherit; text-decoration: none; }
+		button { font: inherit; }
+		.progress {
+			position: fixed;
+			z-index: 20;
+			top: 0;
+			left: 0;
+			width: 0;
+			height: 4px;
+			background: var(--accent);
+			transition: width .1s linear;
+		}
+		.site-header {
+			position: relative;
+			z-index: 5;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 1240px;
+			margin: 0 auto;
+			padding: 27px 32px;
+			border-bottom: 1px solid var(--line);
+		}
+		.brand { display: flex; align-items: center; gap: 11px; font-weight: 700; letter-spacing: -.04em; }
+		.brand-mark { width: 28px; height: 28px; border-radius: 50% 50% 50% 4px; background: var(--accent); transform: rotate(-18deg); }
+		.brand-name { font-size: 1.15rem; }
+		nav { display: flex; align-items: center; gap: 32px; color: var(--muted); font-size: .86rem; }
+		nav a:hover, nav a:focus-visible { color: var(--accent); }
+		.menu-button { display: none; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+		.header-note { color: var(--muted); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+
+		.hero { max-width: 1240px; margin: 0 auto; padding: 85px 32px 72px; }
+		.eyebrow { display: flex; align-items: center; gap: 13px; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+		.eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; }
+		h1, h2, blockquote { font-family: var(--serif); font-weight: 600; letter-spacing: -.045em; }
+		h1 { max-width: 850px; margin: 25px 0 24px; font-size: clamp(3rem, 7vw, 6.7rem); line-height: .98; }
+		.hero-intro { max-width: 570px; margin: 0; color: var(--muted); font-size: 1.15rem; line-height: 1.65; }
+		.hero-meta { display: flex; align-items: center; gap: 15px; margin-top: 38px; color: var(--muted); font-size: .85rem; }
+		.avatar { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--sage); color: #304039; font-weight: 700; }
+		.meta-divider { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-soft); }
+		.hero-art { position: relative; min-height: 390px; margin-top: 62px; overflow: hidden; background: #afc1b5; }
+		.hero-art img { width: 100%; height: 390px; display: block; object-fit: cover; object-position: center 55%; mix-blend-mode: multiply; opacity: .87; }
+		.hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(22, 44, 37, .25), transparent 50%, rgba(201, 80, 54, .12)); }
+		.art-label { position: absolute; z-index: 1; right: 28px; bottom: 23px; color: #fff; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; }
+
+		.article-layout { display: grid; grid-template-columns: 190px minmax(0, 650px) 190px; gap: 70px; max-width: 1100px; margin: 0 auto; padding: 78px 32px 130px; }
+		.toc { position: sticky; top: 28px; align-self: start; color: var(--muted); font-size: .8rem; }
+		.toc-title { margin-bottom: 18px; color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+		.toc a { display: block; padding: 6px 0 6px 14px; border-left: 1px solid var(--line); }
+		.toc a:hover { border-left-color: var(--accent); color: var(--accent); }
+		.article { font-family: var(--serif); font-size: 1.16rem; line-height: 1.8; }
+		.article p { margin: 0 0 27px; }
+		.article h2 { margin: 54px 0 18px; font-size: 2.1rem; line-height: 1.12; }
+		.article .lead { font-size: 1.42rem; line-height: 1.55; }
+		.article::first-letter { color: var(--accent); float: left; padding: 8px 9px 0 0; font-size: 4.6rem; line-height: .8; }
+		blockquote { margin: 44px 0; padding: 25px 0 25px 27px; border-left: 3px solid var(--accent); font-size: 1.65rem; line-height: 1.35; }
+		.share { align-self: start; position: sticky; top: 28px; display: grid; gap: 10px; justify-items: start; }
+		.share-label { color: var(--muted); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; }
+		.share button { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
+		.share button:hover { border-color: var(--accent); color: var(--accent); }
+		.share-status { min-height: 20px; color: var(--accent); font-size: .75rem; }
+
+		footer { border-top: 1px solid var(--line); }
+		.footer-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 35px 32px 44px; color: var(--muted); font-size: .82rem; }
+		.footer-inner strong { color: var(--ink); }
+
+		@media (max-width: 900px) {
+			.article-layout { grid-template-columns: minmax(0, 650px) 50px; justify-content: center; gap: 38px; }
+			.toc { display: none; }
+		}
+		@media (max-width: 620px) {
+			.site-header { padding: 20px; }
+			.header-note { display: none; }
+			.menu-button { display: block; font-size: 1.5rem; line-height: 1; }
+			nav { position: absolute; top: 70px; left: 20px; right: 20px; display: none; padding: 18px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 12px 30px rgba(31, 39, 38, .08); }
+			nav.is-open { display: grid; gap: 14px; }
+			.hero { padding: 54px 20px 45px; }
+			h1 { font-size: clamp(3rem, 16vw, 5rem); }
+			.hero-intro { font-size: 1rem; }
+			.hero-art, .hero-art img { min-height: 300px; height: 300px; margin-top: 45px; }
+			.article-layout { display: block; padding: 55px 20px 90px; }
+			.article { font-size: 1.1rem; }
+			.article .lead { font-size: 1.25rem; }
+			.article h2 { font-size: 1.8rem; }
+			.share { position: static; display: flex; align-items: center; margin-top: 45px; }
+			.share-label { margin-right: 4px; }
+			.footer-inner { align-items: flex-start; flex-direction: column; gap: 12px; padding: 28px 20px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="progress" aria-hidden="true"></div>
+	<header class="site-header">
+		<a class="brand" href="#top" aria-label="Линия, на главную">
+			<span class="brand-mark" aria-hidden="true"></span>
+			<span class="brand-name">линия</span>
+		</a>
+		<div class="header-note">Журнал для вдумчивого чтения</div>
+		<button class="menu-button" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+		<nav aria-label="Основная навигация">
+			<a href="#article">Статьи</a>
+			<a href="#about">О журнале</a>
+			<a href="#footer">Контакты</a>
+		</nav>
+	</header>
+
+	<main id="top">
+		<section class="hero" aria-labelledby="article-title">
+			<div class="eyebrow">Эссе · 8 минут чтения</div>
+			<h1 id="article-title">Искусство замечать простое</h1>
+			<p class="hero-intro">Почему внимание стало новым способом заботы о себе — и как вернуть себе привычку смотреть чуть дольше.</p>
+			<div class="hero-meta">
+				<span class="avatar" aria-hidden="true">АС</span>
+				<span>Алина Соколова</span>
+				<span class="meta-divider" aria-hidden="true"></span>
+				<time datetime="2026-09-26">26 сентября 2026</time>
+			</div>
+			<figure class="hero-art">
+				<img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85" alt="Светлый стол у окна с растением и книгой">
+				<figcaption class="art-label">Фото: Линия / Unsplash</figcaption>
+			</figure>
+		</section>
+
+		<section class="article-layout" id="article">
+			<aside class="toc" aria-label="Содержание статьи">
+				<div class="toc-title">В этой статье</div>
+				<a href="#tempo">Замедлиться</a>
+				<a href="#practice">Маленькая практика</a>
+				<a href="#choice">Свобода выбора</a>
+			</aside>
+
+			<article class="article">
+				<p class="lead">Внимание редко исчезает внезапно. Чаще оно рассеивается понемногу: между уведомлением, открытой вкладкой и мыслью, которую мы так и не договорили.</p>
+				<p>Мы привыкли считать концентрацию строгой дисциплиной. Будто бы нужно всего лишь сильнее захотеть, закрыть все лишние окна и стать человеком, который никогда не отвлекается. Но внимание устроено мягче. Оно не приказ, а направление взгляда.</p>
+
+				<h2 id="tempo">Сначала нужно замедлиться</h2>
+				<p>У любого наблюдения есть собственный темп. Нельзя рассмотреть город в окне по дороге на встречу, а можно — стоя у светофора, заметить, как вечерний свет ложится на мокрый асфальт. Вещи не стали другими. Изменился промежуток, который мы им подарили.</p>
+				<blockquote>Замечать — значит позволять миру побыть рядом чуть дольше, чем требует от нас расписание.</blockquote>
+				<p>Такое замедление не требует отпуска или новой системы планирования. Оно начинается с честного признания: прямо сейчас мне не обязательно быть везде.</p>
+
+				<h2 id="practice">Маленькая практика</h2>
+				<p>Попробуйте выбрать один привычный маршрут и пройти его без наушников. Не для продуктивности и не в поисках красивого кадра. Просто оставьте внимание открытым. Отметьте три звука, два цвета и одну деталь, которую раньше не замечали.</p>
+				<p>Смысл практики не в том, чтобы превратить прогулку в задание. Наоборот: она возвращает ощущение, что день состоит не только из пунктов, которые нужно выполнить.</p>
+
+				<h2 id="choice">Внимание как выбор</h2>
+				<p>Мы не можем удержать в голове всё. Зато можем чаще выбирать, чему дать немного больше времени. Прочитать абзац до конца. Дослушать человека. Посмотреть на знакомое дерево в новом свете.</p>
+				<p>Из таких почти незаметных решений складывается опыт присутствия. Не идеальный и не постоянный — живой. В нём достаточно места и для усталости, и для любопытства, и для простой радости от того, что сегодня вы увидели больше, чем вчера.</p>
+			</article>
+
+			<aside class="share" aria-label="Действия со статьёй">
+				<span class="share-label">Поделиться</span>
+				<button type="button" data-copy aria-label="Скопировать ссылку" title="Скопировать ссылку">↗</button>
+				<span class="share-status" aria-live="polite"></span>
+			</aside>
+		</section>
+	</main>
+
+	<footer id="footer">
+		<div class="footer-inner">
+			<span><strong>линия</strong> — истории, к которым хочется вернуться.</span>
+			<span id="about">Читать можно без регистрации</span>
+		</div>
+	</footer>
+
+	<script>
+		const progress = document.querySelector('.progress');
+		const menuButton = document.querySelector('.menu-button');
+		const nav = document.querySelector('nav');
+		const copyButton = document.querySelector('[data-copy]');
+		const shareStatus = document.querySelector('.share-status');
+
+		window.addEventListener('scroll', () => {
+			const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+			progress.style.width = `${scrollable ? (window.scrollY / scrollable) * 100 : 0}%`;
+		}, { passive: true });
+
+		menuButton.addEventListener('click', () => {
+			const isOpen = nav.classList.toggle('is-open');
+			menuButton.setAttribute('aria-expanded', String(isOpen));
+		});
+
+		nav.addEventListener('click', () => {
+			nav.classList.remove('is-open');
+			menuButton.setAttribute('aria-expanded', 'false');
+		});
+
+		copyButton.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(window.location.href);
+				shareStatus.textContent = 'Ссылка скопирована';
+			} catch (error) {
+				shareStatus.textContent = 'Скопируйте адрес страницы';
+			}
+			window.setTimeout(() => { shareStatus.textContent = ''; }, 2500);
+		});
+	</script>
+</body>
+</html>
