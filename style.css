@@ -71,7 +71,6 @@ img {
 
 .article-header .hero-photo {
   width: 100%;
-  height: 320px;
   background: #e6e0d6 url('') center/contain no-repeat;
   display: flex;
   align-items: center;
@@ -80,6 +79,7 @@ img {
   font-size: 18px;
   letter-spacing: 4px;
 }
+
 
 .article-header .header-content {
   padding: 32px 40px;
