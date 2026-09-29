@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /drafts/
 Disallow: /hlam/
+Disallow: /photo/
 
 Sitemap: https://kvazibuplon.github.io/sitemap.xml
