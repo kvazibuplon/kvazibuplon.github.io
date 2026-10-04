@@ -1,6 +1,15 @@
 User-agent: *
 Disallow: /drafts/
 Disallow: /hlam/
-Disallow: /photo/
+
+User-agent: YandexAdditional
+Allow: /
+Disallow: /drafts/
+Disallow: /hlam/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /drafts/
+Disallow: /hlam/
 
 Sitemap: https://kvazibuplon.github.io/sitemap.xml
