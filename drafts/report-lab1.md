@@ -15,14 +15,14 @@
 
 | Проверка | Результат | Скриншот |
 |---|---|---|
-| Анализ robots.txt в Яндекс Вебмастере | Ошибок нет; проверенные страницы разрешены | [Открыть](drafts/yandex-robots.png) |
-| Анализ sitemap в Яндекс Вебмастере | Найдено 3 URL, ошибок нет | [Открыть](drafts/yandex-sitemap.png) |
-| Ответ сервера для страницы о квазибуплоне | HTTP 200 OK | [Открыть](drafts/server-response.png) |
-| Подтверждение прав в Яндекс Вебмастере | Права подтверждены | [Открыть](drafts/yandex-ownership.png) |
-| Подтверждение прав в Google Search Console | Права подтверждены | [Открыть](drafts/google-ownership.png) |
-| Sitemap в Яндекс Вебмастере | Добавлен в очередь на обработку | [Открыть](drafts/yandex-sitemap-status.png) |
-| Sitemap в Google Search Console | На момент проверки: «Не получено», 0 URL; требуется проверить позднее | [Открыть](drafts/google-sitemap-status.png) |
-| IndexNow | Ответ HTTP 202 Accepted | [Открыть](drafts/indexnow-network.png) |
+| Анализ robots.txt в Яндекс Вебмастере | Ошибок нет; проверенные страницы разрешены | [Открыть](./yandex-robots.png) |
+| Анализ sitemap в Яндекс Вебмастере | Найдено 3 URL, ошибок нет | [Открыть](./yandex-sitemap.png) |
+| Ответ сервера для страницы о квазибуплоне | HTTP 200 OK | [Открыть](./server-response.png) |
+| Подтверждение прав в Яндекс Вебмастере | Права подтверждены | [Открыть](./yandex-ownership.png) |
+| Подтверждение прав в Google Search Console | Права подтверждены | [Открыть](./google-ownership.png) |
+| Sitemap в Яндекс Вебмастере | Добавлен в очередь на обработку | [Открыть](./yandex-sitemap-status.png) |
+| Sitemap в Google Search Console | На момент проверки: «Не получено», 0 URL; требуется проверить позднее | [Открыть](./google-sitemap-status.png) |
+| IndexNow | Ответ HTTP 202 Accepted | [Открыть](./indexnow-network.png) |
 
 ## Проверка разметки страниц
 
@@ -30,4 +30,4 @@
 
 ## Журнал экспериментов
 
-[Открыть журнал экспериментов](journal.md)
+[Открыть журнал экспериментов](./journal.md)
