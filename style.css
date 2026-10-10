@@ -187,16 +187,17 @@ img {
 .gallery.cols-3 { grid-template-columns: repeat(3, 1fr); }
 .gallery.cols-4 { grid-template-columns: repeat(4, 1fr); }
 
+/*
 .gallery img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 1 / 1;   /* единый размер; уберите, если нужны "родные" пропорции */
+  aspect-ratio: 1 / 1;   /* единый размер; уберите, если нужны "родные" пропорции 
   object-fit: cover;
   display: block;
   border-radius: 6px;
   background: #fff;
 }
-
+*/
 @media (max-width: 820px) {
   .gallery.cols-3,
   .gallery.cols-4 { grid-template-columns: repeat(2, 1fr); }
