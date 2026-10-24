@@ -23,6 +23,7 @@
 | Sitemap в Яндекс Вебмастере | Добавлен в очередь на обработку | [Открыть](./yandex-sitemap-status.png) |
 | Sitemap в Google Search Console | На момент проверки: «Не получено», 0 URL; требуется проверить позднее | [Открыть](./google-sitemap-status.png) |
 | IndexNow | Ответ HTTP 202 Accepted | [Открыть](./indexnow-network.png) |
+| Микроразметка Schema.org DefinedTerm | Распознана валидатором Яндекс Вебмастера; ошибок не показано | [Открыть](drafts/yandex-definedterm.png) |
 
 ## Проверка разметки страниц
 
